@@ -1,24 +1,13 @@
 use grafix::utils::color::Color;
-use std::fs::File;
-use std::io::prelude::*;
+use grafix::utils::image::Image;
 
-const HEIGHT: u32 = 256;
-const WIDTH: u32 = 256;
+static ASPECT_RATIO: f64 = 16.0 / 9.0;
+static IMAGE_WIDTH: u32 = 256;
+static VIEWPORT_HEIGHT: f64 = 6.0;
+static FOCAL_LENGTH: f64 = 1.0;
 
 fn main() -> std::io::Result<()> {
-    let mut f = File::options()
-        .append(true)
-        .create(true)
-        .open("image.ppm")?;
-    writeln!(&mut f, "P3")?;
-    writeln!(&mut f, "{} {}", HEIGHT, WIDTH)?;
-    writeln!(&mut f, "255")?;
-
-    for i in 0..HEIGHT {
-        for j in 0..WIDTH {
-            Color::from_u32(i, j, 0).write(&mut f)?;
-        }
-    }
-
+    let image: Image = Image::new(IMAGE_WIDTH, ASPECT_RATIO, VIEWPORT_HEIGHT, FOCAL_LENGTH);
+    image.render()?;
     Ok(())
 }

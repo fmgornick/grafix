@@ -2,6 +2,9 @@ use num::Float;
 use std::ops::{Add, Div, Mul, Neg, Rem, Sub};
 use std::ops::{AddAssign, DivAssign, MulAssign, RemAssign, SubAssign};
 
+pub type Point3 = Vec3<f64>;
+pub type Dir3 = Vec3<f64>;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Vec3<T>
 where
@@ -157,6 +160,3 @@ where
         }
     }
 }
-
-pub type Point3 = Vec3<f64>;
-pub type Dir3 = Vec3<f64>;
